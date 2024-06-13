@@ -12,7 +12,6 @@ stages {
     
     stage('Build') {
         steps {
-            sh 'git checkout -b main'
             sh 'docker build -t your-image .'
         }
     }
