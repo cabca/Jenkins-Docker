@@ -18,7 +18,7 @@ stages {
     
     stage('Test') {
         steps {
-            sh 'run --name test-container -p 3000:3000 -d your-image'
+            sh 'docker run --name test-container -p 3000:3000 -d your-image'
         }
     }
     
