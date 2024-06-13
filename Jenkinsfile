@@ -5,7 +5,7 @@ pipeline
 stages {
     stage('Checkout main branch') {
         steps {
-            git 'https://github.com/mihai-pruna/Jenkins-Docker.git'
+           checkout scm  
         }
     }
     
