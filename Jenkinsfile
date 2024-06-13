@@ -17,9 +17,11 @@ stages {
     
     stage('Test') {
         steps {
-            sh 'docker run --name test-container -p 3000:3000 -d your-image'
+            sh '''docker run docker test-container 
+                  run --name test-container -p 3000:3000 -d your-image 
+                  && status_code=$(curl -s -o /dev/null -w "%{http_code}" localhost:8080) || $?'''
+            }
         }
-    }
     
     stage('Push to DockerHub') {
         steps {
