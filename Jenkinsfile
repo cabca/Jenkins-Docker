@@ -3,7 +3,7 @@ pipeline
     agent any
 
 stages {
-    stage('Checkout') {
+    stage('Checkout main branch') {
         steps {
             git 'https://github.com/mihai-pruna/Jenkins-Docker.git'
         }
