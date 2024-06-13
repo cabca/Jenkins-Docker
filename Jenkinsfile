@@ -1,4 +1,6 @@
-pipeline { agent any
+pipeline 
+{ 
+    agent any
 
 stages {
     stage('Checkout') {
@@ -25,9 +27,8 @@ stages {
                 sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
                 sh "docker tag your-image your-dockerhub-username/your-image"
                 sh "docker push your-dockerhub-username/your-image"
-            }
-        }
-    }
-}
-
+              }
+          }
+      }
+   }
 }
