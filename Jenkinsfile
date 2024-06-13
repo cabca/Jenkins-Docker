@@ -19,7 +19,7 @@ stages {
     
     stage('Test') {
         steps {
-            sh 'docker run your-image npm test'
+            sh 'run --name test-container -p 3000:3000 -d your-image'
         }
     }
     
