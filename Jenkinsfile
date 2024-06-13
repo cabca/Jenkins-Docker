@@ -17,9 +17,9 @@ stages {
     
     stage('Test') {
         steps {
-            sh '''docker run docker test-container 
-                  run --name test-container -p 3000:3000 -d your-image 
-                  && status_code=$(curl -s -o /dev/null -w "%{http_code}" localhost:8080) || $?'''
+            sh '''docker run docker test-container &&
+                  docker run --name test-container -p 3000:3000 -d your-image &&
+                  status_code=$(curl -s -o /dev/null -w "%{http_code}" localhost:8080) || $?'''
             }
         }
     
