@@ -29,9 +29,9 @@ stages {
                                               usernameVariable: "DOCKER_USERNAME", 
                                               passwordVariable: "DOCKER_PASSWORD")]) 
                     {
-                        sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}" 
-                        sh "docker tag your-image your-dockerhub-username/your-image"
-                        sh "docker push your-dockerhub-username/your-image"
+                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD" 
+                        sh "docker tag your-image ${DOCKER_USERNAME}/your-image"
+                        sh "docker push ${DOCKER_USERNAME}/your-image"
                     }
                 }
              }
