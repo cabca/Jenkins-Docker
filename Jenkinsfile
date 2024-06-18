@@ -1,6 +1,10 @@
 pipeline 
 { 
     agent any
+environment {
+        DOCKER_ID = credentials('DOCKER_ID')
+        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+}
 
 stages {
     stage('Checkout main branch') {
@@ -25,13 +29,10 @@ stages {
     
     stage('Push to DockerHub') {
         steps {
-            withCredentials([usernamePassword(credentialsId: "docker-hub-credentials", 
-                                              usernameVariable: "DOCKER_USERNAME", 
-                                              passwordVariable: "DOCKER_PASSWORD")]) 
-                    {
-                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD" 
-                        sh "docker tag your-image ${DOCKER_USERNAME}/your-image"
-                        sh "docker push ${DOCKER_USERNAME}/your-image"
+                   sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
+                   sh "docker tag your-image ${DOCKER_USERNAME}/your-image"
+                   sh "docker push ${DOCKER_USERNAME}/your-image"
+                    
                     }
                 }
              }
