@@ -21,9 +21,11 @@ stages {
     
     stage('Test') {
         steps {
-            sh '''docker rm -f node-container &&
+            sh '''&&
                   docker run --name node-container -p 3000:3000 -d node-app &&
-                  status_code=$(curl -s -o /dev/null -w "%{http_code}" localhost:8080) || $?'''
+                  status_code=$(curl -s -o /dev/null -w "%{http_code}" localhost:8080) || $?
+                  docker stop node-container && docker rm -f node-container
+               '''
             }
         }
     
