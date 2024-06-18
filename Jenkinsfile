@@ -15,14 +15,14 @@ stages {
     
     stage('Build') {
         steps {
-            sh 'docker build -t your-image .'
+            sh 'docker build -t node-app .'
         }
     }
     
     stage('Test') {
         steps {
-            sh '''docker rm -f test-container &&
-                  docker run --name test-container -p 3000:3000 -d your-image &&
+            sh '''docker rm -f node-container &&
+                  docker run --name node-container -p 3000:3000 -d node-app &&
                   status_code=$(curl -s -o /dev/null -w "%{http_code}" localhost:8080) || $?'''
             }
         }
@@ -30,11 +30,10 @@ stages {
     stage('Push to DockerHub') {
         steps {
                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
-                   sh "docker tag your-image ${DOCKER_USERNAME}/your-image"
-                   sh "docker push ${DOCKER_USERNAME}/your-image"
-                    
-                    }
+                   sh "docker tag your-image ${DOCKER_ID}/node-app"
+                   sh "docker push ${DOCKER_ID}/node-app" 
                 }
-             }
+            }
         }
+    }
 
