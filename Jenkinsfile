@@ -22,9 +22,9 @@ stages {
     stage('Test') {
         steps {
             sh '''
-                  if [ $(docker ps -q -f name=container_name) ]; then
-                        docker stop container_name
-                        docker rm container_name
+                  if [ $(docker ps -q -f name=node-container) ]; then
+                        docker stop node-container
+                        docker rm node-container
                   else
                         docker run --name node-container -p 3000:3000 -d node-app &&
                         status_code=$(curl -s -o /dev/null -w "%{http_code}" localhost:8080) || $?
