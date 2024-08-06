@@ -37,7 +37,7 @@ stages {
     stage('Push to DockerHub') {
         steps {
                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
-                   sh "docker tag your-image ${DOCKER_ID}/node-app"
+                   sh "docker tag node-app ${DOCKER_ID}/node-app"
                    sh "docker push ${DOCKER_ID}/node-app" 
                 }
             }
